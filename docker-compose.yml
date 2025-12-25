@@ -29,6 +29,7 @@ services:
       JWT_SECRET: "rbKgoHnNICCmMKWtguLsry4qlDDO-v5zQQt_d1oZyD0"
     volumes:
       - /volume1/boardshop/strapi:/srv/app
+      - /volume1/boardshop/uploads:/srv/app/public/uploads
     ports:
       - "1337:1337"
 

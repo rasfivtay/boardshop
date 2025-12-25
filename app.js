@@ -128,7 +128,7 @@ const translations = {
 };
 
 const promoCodes = [{ code: 'POWDER10', discount: 10 }, { code: 'SNOW5', discount: 5 }];
-const STRAPI_BASE_URL = `${window.location.protocol}//${window.location.hostname}:1337`;
+const STRAPI_BASE_URL = `https://strapi.shop.anekrasov.hopto.org`;
 const STRAPI_PRODUCTS_URL = `${STRAPI_BASE_URL}/api/products?pagination%5BpageSize%5D=200`;
 
 const state = {
@@ -282,9 +282,12 @@ function renderProducts() {
       const sizeSelectHtml = sizeOptions
         ? `<label class="muted">${t('filters.size')}<select data-size-for="${p.id}">${sizeOptions}</select></label>`
         : '';
-      const image = p.image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80';
+      const image = p.image || '';
+      const imageHtml = image
+        ? `<img class="card__image" src="${image}" alt="${getProductName(p)}" />`
+        : '';
       return `<div class="card">
-        <img class="card__image" src="${image}" alt="${getProductName(p)}" />
+        ${imageHtml}
         <div class="card__meta">${p.category} <span class="badge">${p.brand}</span></div>
         <div class="card__title">${getProductName(p)}</div>
         <div class="muted">${getProductDescription(p)}</div>
