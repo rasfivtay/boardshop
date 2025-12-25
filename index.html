@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Boardshop — Ski & Snowboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__brand">
+      <div class="brand__logo">🏂</div>
+      <div>
+        <div class="brand__title">Boardshop</div>
+        <div class="brand__subtitle" data-i18n="tagline">Горнолыжное и сноубордическое снаряжение</div>
+      </div>
+    </div>
+    <div class="hero__actions">
+      <div class="lang-switch" role="group">
+        <button class="lang-btn" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="ky">KG</button>
+      </div>
+      <nav class="nav">
+        <button class="nav__item" data-section="catalog" data-i18n="nav.catalog">Каталог</button>
+        <button class="nav__item" data-section="cart" data-i18n="nav.cart">Корзина</button>
+        <button class="nav__item" data-section="admin" data-i18n="nav.admin">Админка</button>
+        <button class="nav__item" data-section="policy" data-i18n="nav.policy">Возврат</button>
+        <button class="nav__item" data-section="contacts" data-i18n="nav.contacts">Контакты</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="catalog" class="panel">
+      <div class="panel__header">
+        <div>
+          <h2 data-i18n="sections.catalog.title">Каталог</h2>
+          <p class="muted" data-i18n="sections.catalog.subtitle">Выберите снаряжение под свой стиль</p>
+        </div>
+        <div class="filters">
+          <label>
+            <span data-i18n="filters.category">Категория</span>
+            <select id="filter-category"></select>
+          </label>
+          <label>
+            <span data-i18n="filters.brand">Бренд</span>
+            <select id="filter-brand"></select>
+          </label>
+          <label>
+            <span data-i18n="filters.size">Размер / ростовка</span>
+            <select id="filter-size"></select>
+          </label>
+          <label>
+            <span data-i18n="filters.price">Цена, сом</span>
+            <input type="range" id="filter-price" min="0" max="200000" step="1000" value="200000" />
+            <span class="range-value" id="price-value"></span>
+          </label>
+        </div>
+      </div>
+      <div id="product-grid" class="grid"></div>
+    </section>
+
+    <section id="cart" class="panel hidden">
+      <div class="panel__header">
+        <div>
+          <h2 data-i18n="sections.cart.title">Корзина</h2>
+          <p class="muted" data-i18n="sections.cart.subtitle">Без онлайн-оплаты. Оставьте контакты — мы подтвердим заказ и стоимость доставки.</p>
+        </div>
+        <div class="promo">
+          <label>
+            <span data-i18n="promo.label">Промокод</span>
+            <input type="text" id="promo-code" placeholder="POWDER10" />
+          </label>
+          <button id="apply-promo" class="button" data-i18n="promo.apply">Применить</button>
+          <div id="promo-status" class="muted"></div>
+        </div>
+      </div>
+      <div id="cart-items"></div>
+      <div class="checkout">
+        <div class="checkout__totals">
+          <div><span data-i18n="cart.subtotal">Сумма</span> <strong id="cart-subtotal">0</strong> <span class="currency">KGS</span></div>
+          <div><span data-i18n="cart.discount">Скидка</span> <strong id="cart-discount">0</strong> <span class="currency">KGS</span></div>
+          <div><span data-i18n="cart.total">Итого</span> <strong id="cart-total">0</strong> <span class="currency">KGS</span></div>
+        </div>
+        <form id="checkout-form" class="form">
+          <h3 data-i18n="checkout.title">Оформление</h3>
+          <label>
+            <span data-i18n="checkout.name">Имя</span>
+            <input required id="customer-name" />
+          </label>
+          <label>
+            <span data-i18n="checkout.email">Email</span>
+            <input type="email" required id="customer-email" />
+          </label>
+          <label>
+            <span data-i18n="checkout.phone">Телефон</span>
+            <input required id="customer-phone" placeholder="+996" />
+          </label>
+          <label>
+            <span data-i18n="checkout.address">Адрес доставки</span>
+            <textarea id="customer-address" rows="2"></textarea>
+          </label>
+          <label>
+            <span data-i18n="checkout.delivery">Способ доставки</span>
+            <select id="delivery-method">
+              <option value="cdek" data-i18n="delivery.cdek">СДЭК (уточним стоимость по email)</option>
+              <option value="pickup" data-i18n="delivery.pickup">Самовывоз</option>
+            </select>
+          </label>
+          <p class="muted" data-i18n="checkout.notice">Мы свяжемся по email/телефону, подтвердим заказ и рассчитаем доставку.</p>
+          <button class="button" type="submit" data-i18n="checkout.submit">Подтвердить заказ</button>
+          <div id="checkout-status" class="status"></div>
+        </form>
+      </div>
+      <div class="orders">
+        <h3 data-i18n="orders.title">История заказов</h3>
+        <div id="order-history" class="muted"></div>
+      </div>
+    </section>
+
+    <section id="admin" class="panel hidden">
+      <div class="panel__header">
+        <div>
+          <h2 data-i18n="sections.admin.title">Админка</h2>
+          <p class="muted" data-i18n="sections.admin.subtitle">Быстрое добавление товаров и загрузка из Google Sheets</p>
+        </div>
+        <a class="button ghost" href="import_template.csv" download data-i18n="admin.template">Скачать шаблон импорта</a>
+      </div>
+      <form id="admin-form" class="form">
+        <div class="form__grid">
+          <label><span data-i18n="admin.nameRu">Название (RU)</span><input required id="admin-name-ru" /></label>
+          <label><span data-i18n="admin.nameKy">Название (KG)</span><input required id="admin-name-ky" /></label>
+          <label><span data-i18n="admin.descRu">Описание (RU)</span><textarea required id="admin-desc-ru"></textarea></label>
+          <label><span data-i18n="admin.descKy">Описание (KG)</span><textarea required id="admin-desc-ky"></textarea></label>
+          <label><span data-i18n="admin.category">Категория</span><input required id="admin-category" placeholder="Skiing › alpine skis" /></label>
+          <label><span data-i18n="admin.brand">Бренд</span><input required id="admin-brand" /></label>
+          <label><span data-i18n="admin.price">Цена, KGS</span><input required type="number" min="0" id="admin-price" /></label>
+          <label><span data-i18n="admin.sizes">Размеры/ростовки</span><input id="admin-sizes" placeholder="170cm,180cm" /></label>
+          <label><span data-i18n="admin.url">URL фото</span><input id="admin-image" placeholder="https://..." /></label>
+        </div>
+        <button class="button" type="submit" data-i18n="admin.add">Добавить товар</button>
+        <div id="admin-status" class="status"></div>
+      </form>
+      <div class="muted" data-i18n="admin.hint">Данные сохраняются в браузере (localStorage). Для продакшена добавьте API или headless CMS.</div>
+    </section>
+
+    <section id="policy" class="panel hidden">
+      <div class="panel__header">
+        <div>
+          <h2 data-i18n="sections.policy.title">Политика возврата</h2>
+          <p class="muted" data-i18n="sections.policy.subtitle">Мультиязычный текст на русском и кыргызском</p>
+        </div>
+      </div>
+      <div class="policy">
+        <h3 data-i18n="policy.ru.title">Политика возврата (RU)</h3>
+        <ol>
+          <li data-i18n="policy.ru.point1">Вы можете вернуть товар в течение 14 дней с даты получения.</li>
+          <li data-i18n="policy.ru.point2">Товар должен быть в новом состоянии, с бирками и упаковкой.</li>
+          <li data-i18n="policy.ru.point3">Расходы на пересылку оплачивает покупатель, кроме случаев брака.</li>
+          <li data-i18n="policy.ru.point4">Напишите на djdrewsha@gmail.com или в Telegram Andrei_outdoor_stuff с номером заказа.</li>
+        </ol>
+        <h3 data-i18n="policy.ky.title">Товарды кайтаруу саясаты (KG)</h3>
+        <ol>
+          <li data-i18n="policy.ky.point1">Товарды алуу күнүнөн тартып 14 күн ичинде кайтара аласыз.</li>
+          <li data-i18n="policy.ky.point2">Товар жаңы абалда, белгичелери жана таңгактоосу менен болушу керек.</li>
+          <li data-i18n="policy.ky.point3">Жөнөтүү чыгымдарын сатып алуучу төлөйт, бирок кемчилик болгондо — дүкөн төлөйт.</li>
+          <li data-i18n="policy.ky.point4">djdrewsha@gmail.com дарегине же Telegram Andrei_outdoor_stuff аркылуу заказ номерин жазыңыз.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="contacts" class="panel hidden">
+      <div class="panel__header">
+        <div>
+          <h2 data-i18n="sections.contacts.title">Контакты</h2>
+          <p class="muted" data-i18n="sections.contacts.subtitle">Самовывоз и поддержка</p>
+        </div>
+      </div>
+      <div class="contacts">
+        <div>
+          <h3 data-i18n="contacts.pickup">Самовывоз</h3>
+          <p>12 Microdistrict, 3/2<br/>Chuy, Bishkek<br/>KYRGYZSTAN</p>
+          <p data-i18n="contacts.hours">Ежедневно 09:00–18:00</p>
+          <p><strong>Email:</strong> <a href="mailto:djdrewsha@gmail.com">djdrewsha@gmail.com</a></p>
+          <p><strong>Telegram:</strong> <a href="https://t.me/Andrei_outdoor_stuff" target="_blank">@Andrei_outdoor_stuff</a></p>
+        </div>
+        <div class="map">
+          <iframe title="Pickup map" src="https://www.openstreetmap.org/export/embed.html?bbox=74.558%2C42.840%2C74.64%2C42.90&amp;layer=mapnik" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© 2024 Boardshop</div>
+    <div class="muted" data-i18n="footer.note">Данные и корзина сохраняются локально. Для продакшена добавьте сервер или CMS.</div>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
