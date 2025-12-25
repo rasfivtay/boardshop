@@ -14,7 +14,7 @@ services:
       - "5432:5432"
 
   strapi:
-    image: strapi/strapi:latest
+    image: dunadigital/strapi:latest
     restart: unless-stopped
     depends_on:
       - db
@@ -25,10 +25,10 @@ services:
       DATABASE_NAME: strapi
       DATABASE_USERNAME: strapi
       DATABASE_PASSWORD: strapi
-      APP_KEYS: "change-me-1,change-me-2,change-me-3,change-me-4"
-      API_TOKEN_SALT: "change-me-api-token-salt"
-      ADMIN_JWT_SECRET: "change-me-admin-jwt"
-      JWT_SECRET: "change-me-jwt"
+      APP_KEYS: "h7ki4S3U5r-H-Gl6wlMrf3IWSrj0LG2r0yiydRARzq0,uDt85MYBj89KcuFWKKmmimVwXWQ-lYURW3H-adknwoo,2jjCoI404Z-rNeb9JwdwkUINTu55PtbhTycm9vjQPCQ,Lt0Esqh9IyZnSVx9E-9yO5ognDX4eOG-XcPlriorrdc"
+      API_TOKEN_SALT: "pygzq7ivW52JMn2_9I2xUJUtb87y5a9-3wz6YYc1ZU4"
+      ADMIN_JWT_SECRET: "B3lKpqxsOT3-JPyfFJLhn26bxsR5q8XxDZbpSCqmsR8"
+      JWT_SECRET: "rbKgoHnNICCmMKWtguLsry4qlDDO-v5zQQt_d1oZyD0"
     volumes:
       - ./strapi-app:/srv/app
     ports:
