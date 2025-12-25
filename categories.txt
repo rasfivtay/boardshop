@@ -1,0 +1,25 @@
+- Skiing 
+  - skis
+    - alpine skis
+    - freeride skis
+	- touring skis
+  - biddings
+    - alpine biddings
+	- touring biddings
+	
+- Snowboard
+  - snowboards
+  - splitboards
+  - snowboard biddings
+  - splitboard biddings
+  
+- Avalanche safety
+  - Avalanche backpacks
+  - Avalanche beacons
+  - Avalanche probes
+  - Avalanche shovels
+  - Avalanche sets
+  
+- Climbing
+
+- Treking
