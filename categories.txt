@@ -3,15 +3,15 @@
     - alpine skis
     - freeride skis
 	- touring skis
-  - biddings
-    - alpine biddings
-	- touring biddings
+  - bindings
+    - alpine bindings
+	- touring bindings
 	
 - Snowboard
   - snowboards
   - splitboards
-  - snowboard biddings
-  - splitboard biddings
+  - snowboard bindings
+  - splitboard bindings
   
 - Avalanche safety
   - Avalanche backpacks
