@@ -47,7 +47,7 @@ const translations = {
     'admin.sizes': 'Размеры/ростовки',
     'admin.url': 'URL фото',
     'admin.add': 'Добавить товар',
-    'admin.hint': 'Данные сохраняются в браузере (localStorage). Для продакшена добавьте API или headless CMS.',
+    'admin.hint': 'Товары хранятся в Strapi (NAS). Добавляйте через админку.',
     'policy.ru.title': 'Политика возврата (RU)',
     'policy.ru.point1': 'Вы можете вернуть товар в течение 14 дней с даты получения.',
     'policy.ru.point2': 'Товар должен быть в новом состоянии, с бирками и упаковкой.',
@@ -60,7 +60,7 @@ const translations = {
     'policy.ky.point4': 'djdrewsha@gmail.com дарегине же Telegram Andrei_outdoor_stuff аркылуу заказ номерин жазыңыз.',
     'contacts.pickup': 'Самовывоз',
     'contacts.hours': 'Ежедневно 09:00–18:00',
-    'footer.note': 'Данные и корзина сохраняются локально. Для продакшена добавьте сервер или CMS.'
+    'footer.note': 'Каталог хранится в Strapi (Postgres на NAS). Корзина пока локально в браузере.'
   },
   ky: {
     tagline: 'Тоонун лыжа жана сноуборд жабдуулары',
@@ -110,7 +110,7 @@ const translations = {
     'admin.sizes': 'Өлчөмдөр/ростовкалар',
     'admin.url': 'Сүрөт URL',
     'admin.add': 'Товар кошуу',
-    'admin.hint': 'Маалымат браузерде сакталат (localStorage). Продакшн үчүн API же CMS кошуңуз.',
+    'admin.hint': 'Товарлар Strapi (NAS) ичинде сакталат. Админка аркылуу кошуңуз.',
     'policy.ru.title': 'Политика возврата (RU)',
     'policy.ru.point1': 'Вы можете вернуть товар в течение 14 дней с даты получения.',
     'policy.ru.point2': 'Товар должен быть в новом состоянии, с бирками и упаковкой.',
@@ -123,119 +123,45 @@ const translations = {
     'policy.ky.point4': 'djdrewsha@gmail.com дарегине же Telegram Andrei_outdoor_stuff аркылуу заказ номерин жазыңыз.',
     'contacts.pickup': 'Самовывоз',
     'contacts.hours': 'Күн сайын 09:00–18:00',
-    'footer.note': 'Маалымат жана себет жергиликтүү сакталат. Продакшн үчүн сервер/CMS кошуңуз.'
+    'footer.note': 'Каталог Strapi (Postgres) аркылуу сакталат. Себет азырынча браузерде сакталат.'
   }
 };
 
-const defaultProducts = [
-  {
-    id: 'skis-atom-1',
-    name: { ru: 'Alpine Skis Nova', ky: 'Alpine Skis Nova' },
-    description: {
-      ru: 'Карвинг для подготовленных трасс, ростовки под прогрессирующих райдеров.',
-      ky: 'Даяр жолдор үчүн карвинг, өсүп жаткан райдерлерге ылайык ростовка.'
-    },
-    category: 'Skiing › alpine skis',
-    brand: 'Atomic',
-    price: 42000,
-    sizes: ['160cm', '168cm', '176cm'],
-    image: 'https://images.unsplash.com/photo-1520695115031-4e30f050c9c3?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'skis-touring-1',
-    name: { ru: 'Freeride Touring 100', ky: 'Freeride Touring 100' },
-    description: {
-      ru: 'Лёгкие туринговые лыжи для ски-тура и беккантри.',
-      ky: 'Ски-тур жана бэккантри үчүн жеңил туринг лыжалары.'
-    },
-    category: 'Skiing › freeride skis › touring skis',
-    brand: 'Black Crows',
-    price: 61000,
-    sizes: ['170cm', '178cm'],
-    image: 'https://images.unsplash.com/photo-1456428199391-a3b1cb5e93ab?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'bindings-1',
-    name: { ru: 'Alpine Bindings Evo', ky: 'Alpine Bindings Evo' },
-    description: {
-      ru: 'Надёжные крепления для горных лыж, совместимы с ISO 5355.',
-      ky: 'ISO 5355 шайкеш ишенимдүү лыжа байлагычтары.'
-    },
-    category: 'Skiing › bindings › alpine bindings',
-    brand: 'Marker',
-    price: 28000,
-    sizes: ['255-365mm'],
-    image: 'https://images.unsplash.com/photo-1512492300136-244a77e87c1f?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'snowboard-1',
-    name: { ru: 'All-mountain Snowboard Drift', ky: 'All-mountain Snowboard Drift' },
-    description: {
-      ru: 'Доска для курортного катания и первых выходов в пухляк.',
-      ky: 'Курорттук айдоо жана биринчи powder үчүн универсалдуу доска.'
-    },
-    category: 'Snowboard › snowboards',
-    brand: 'Burton',
-    price: 53000,
-    sizes: ['152cm', '158cm'],
-    image: 'https://images.unsplash.com/photo-1516569422865-0b4c0c15ee24?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'split-1',
-    name: { ru: 'Splitboard Explore', ky: 'Splitboard Explore' },
-    description: {
-      ru: 'Сплитборд для походов и фрирайда, лёгкий сердечник.',
-      ky: 'Жөө жүрүү жана фрирайд үчүн сплитборд, жеңил өзөк.'
-    },
-    category: 'Snowboard › splitboards',
-    brand: 'Jones',
-    price: 87000,
-    sizes: ['158cm', '161cm'],
-    image: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'avalanche-set',
-    name: { ru: 'Avalanche Safety Set', ky: 'Avalanche Safety Set' },
-    description: {
-      ru: 'Бипер, щуп и лопата в одном наборе для бэккантри.',
-      ky: 'Бипер, зонд жана күрөк бир топтомдо — бэккантри үчүн.'
-    },
-    category: 'Avalanche safety › Avalanche sets',
-    brand: 'Ortovox',
-    price: 39000,
-    sizes: [],
-    image: 'https://images.unsplash.com/photo-1516569422865-0b4c0c15ee24?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'helmet-1',
-    name: { ru: 'Ski Helmet Air', ky: 'Ski Helmet Air' },
-    description: {
-      ru: 'Лёгкий шлем с вентиляцией и креплением под маску.',
-      ky: 'Жеңил шлем вентиляциясы менен, маскага ылайык.'
-    },
-    category: 'Climbing',
-    brand: 'Petzl',
-    price: 19000,
-    sizes: ['S/M', 'M/L'],
-    image: 'https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=800&q=80'
-  }
-];
-
 const promoCodes = [{ code: 'POWDER10', discount: 10 }, { code: 'SNOW5', discount: 5 }];
+const STRAPI_BASE_URL = `${window.location.protocol}//${window.location.hostname}:1337`;
+const STRAPI_PRODUCTS_URL = `${STRAPI_BASE_URL}/api/products?pagination%5BpageSize%5D=200`;
 
 const state = {
   lang: 'ru',
-  products: loadProducts(),
+  products: [],
+  loadingProducts: true,
   cart: loadFromStorage('cart', []),
   promo: null,
   orders: loadFromStorage('orders', [])
 };
 
-function loadProducts() {
-  const stored = loadFromStorage('products');
-  if (stored && Array.isArray(stored)) return stored;
-  saveToStorage('products', defaultProducts);
-  return [...defaultProducts];
+function mapStrapiProduct(entry) {
+  const attrs = entry.attributes || entry;
+  const sizesRaw = attrs.sizes || '';
+  const sizes = Array.isArray(sizesRaw)
+    ? sizesRaw
+    : sizesRaw
+        .split(/[|,]/)
+        .map((s) => s.trim())
+        .filter(Boolean);
+  return {
+    id: entry.documentId || entry.id?.toString() || attrs.slug || attrs.sku || `product-${Date.now()}`,
+    name: { ru: attrs.name_ru || attrs.name || '', ky: attrs.name_ky || attrs.name_ru || attrs.name || '' },
+    description: {
+      ru: attrs.description_ru || '',
+      ky: attrs.description_ky || attrs.description_ru || ''
+    },
+    category: attrs.category || 'Категория',
+    brand: attrs.brand || '',
+    price: Number(attrs.price) || 0,
+    sizes,
+    image: attrs.image_url || attrs.image
+  };
 }
 
 function loadFromStorage(key, fallback = null) {
@@ -329,6 +255,14 @@ function getProductDescription(product) {
 
 function renderProducts() {
   const grid = document.getElementById('product-grid');
+  if (state.loadingProducts) {
+    grid.innerHTML = `<div class="muted">${state.lang === 'ky' ? 'Жүктөлүүдө…' : 'Загружаем каталог…'}</div>`;
+    return;
+  }
+  if (!state.products.length) {
+    grid.innerHTML = `<div class="muted">${state.lang === 'ky' ? 'Товарлар жок' : 'Нет товаров'}</div>`;
+    return;
+  }
   const filterCategory = categorySelect.value;
   const filterBrand = brandSelect.value;
   const filterSize = sizeSelect.value;
@@ -533,28 +467,19 @@ document.getElementById('checkout-form').addEventListener('submit', handleChecko
 function handleAdmin(e) {
   e.preventDefault();
   const product = {
-    id: `sku-${Date.now()}`,
-    name: {
-      ru: document.getElementById('admin-name-ru').value.trim(),
-      ky: document.getElementById('admin-name-ky').value.trim()
-    },
-    description: {
-      ru: document.getElementById('admin-desc-ru').value.trim(),
-      ky: document.getElementById('admin-desc-ky').value.trim()
-    },
-    category: document.getElementById('admin-category').value.trim(),
+    name: document.getElementById('admin-name-ru').value.trim(),
     brand: document.getElementById('admin-brand').value.trim(),
-    price: Number(document.getElementById('admin-price').value),
-    sizes: document.getElementById('admin-sizes').value.split(',').map((s) => s.trim()).filter(Boolean),
+    price: document.getElementById('admin-price').value.trim(),
+    sizes: document.getElementById('admin-sizes').value.trim(),
     image: document.getElementById('admin-image').value.trim()
   };
 
-  state.products.unshift(product);
-  saveToStorage('products', state.products);
-  document.getElementById('admin-status').textContent = state.lang === 'ky' ? 'Товар кошулду' : 'Товар добавлен';
-  e.target.reset();
-  buildFilters();
-  renderProducts();
+  const note =
+    state.lang === 'ky'
+      ? `Товарларды Strapi админкасы аркылуу кошуңуз: ${STRAPI_BASE_URL}/admin`
+      : `Добавляйте товары через Strapi админку: ${STRAPI_BASE_URL}/admin`;
+  document.getElementById('admin-status').textContent = note;
+  console.log('Готовые данные для Strapi:', product);
 }
 
 document.getElementById('admin-form').addEventListener('submit', handleAdmin);
@@ -566,5 +491,21 @@ function render() {
   renderOrders();
 }
 
+async function loadProductsFromStrapi() {
+  try {
+    const res = await fetch(STRAPI_PRODUCTS_URL);
+    if (!res.ok) throw new Error(`Strapi ${res.status}`);
+    const payload = await res.json();
+    const data = payload.data || [];
+    state.products = data.map(mapStrapiProduct);
+  } catch (e) {
+    console.error('Failed to load products from Strapi, fallback to empty list', e);
+    state.products = [];
+  } finally {
+    state.loadingProducts = false;
+    render();
+  }
+}
+
 translate();
-render();
+loadProductsFromStrapi();

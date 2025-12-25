@@ -9,9 +9,7 @@ services:
       POSTGRES_PASSWORD: strapi
       POSTGRES_DB: strapi
     volumes:
-      - db-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+      - /volume1/boardshop/db:/var/lib/postgresql/data
 
   strapi:
     image: dunadigital/strapi:latest
@@ -30,7 +28,7 @@ services:
       ADMIN_JWT_SECRET: "B3lKpqxsOT3-JPyfFJLhn26bxsR5q8XxDZbpSCqmsR8"
       JWT_SECRET: "rbKgoHnNICCmMKWtguLsry4qlDDO-v5zQQt_d1oZyD0"
     volumes:
-      - ./strapi-app:/srv/app
+      - /volume1/boardshop/strapi:/srv/app
     ports:
       - "1337:1337"
 
